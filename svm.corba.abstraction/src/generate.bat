@@ -22,10 +22,16 @@ echo -- -- CTO
 idlj -fall cto/CTO.idl
 echo -- -- CTOAuth
 idlj -fall cto/CTOAuth.idl
-echo -- -- CTOMember
-idlj -fall cto/CTOMember.idl
+echo -- -- CTOContest
+idlj -fall cto/CTOContest.idl
 echo -- -- CTOLocation
 idlj -fall cto/CTOLocation.idl
+echo -- -- CTOMatch
+idlj -fall cto/CTOMatch.idl
+echo -- -- CTOMember
+idlj -fall cto/CTOMember.idl
+echo -- -- CTOTeam
+idlj -fall cto/CTOTeam.idl
 
 echo -
 echo -- Generate Controller
@@ -37,6 +43,8 @@ echo -- -- CorbaMemberController
 idlj -fall controller/CorbaMemberController.idl
 
 echo -
+echo -- Generate Export
+idlj -fall Export.idl
 echo -- Generate ControllerFactory
 idlj -fall CorbaControllerFactory.idl
 

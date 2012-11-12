@@ -1,4 +1,20 @@
-#include <all.idl>
+#ifndef _CorbaLoginController
+    #include <controller/CorbaLoginController.idl>
+    #define _CorbaLoginController
+#endif
+#ifndef _CorbaMemberController
+    #include <controller/CorbaMemberController.idl>
+    #define _CorbaMemberController
+#endif
+
+#ifndef  _RegisterException
+    #include <exceptions/RegisterException.idl>
+    #define _RegisterException
+#endif
+#ifndef  _AuthNotFoundException
+    #include <exceptions/AuthNotFoundException.idl>
+    #define _AuthNotFoundException
+#endif
 
 module svm { module corba { module abstraction {
     module cfactory {

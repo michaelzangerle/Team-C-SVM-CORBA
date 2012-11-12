@@ -1,6 +1,14 @@
-#ifndef _CTO
-    #include <cto/CTO.idl>
-    #define _CTO
+#ifndef _CTOTeam
+    #include <cto/CTOTeam.idl>
+    #define _CTOTeam
+#endif
+#ifndef _CTOMatch
+    #include <cto/CTOMatch.idl>
+    #define _CTOMatch
+#endif
+#ifndef _CTOContest
+    #include <cto/CTOContest.idl>
+    #define _CTOContest
 #endif
 
 module svm { module corba { module abstraction {
@@ -15,27 +23,10 @@ module svm { module corba { module abstraction {
             sequence<cto::match::CTOMatch> matches;
         };
     };
-    module cto {
-        module team {
-            interface CTOTeam : CTO {
-
-            };
-        };
-        module contest {
-            interface CTOContest : CTO {
-
-            };
-        };
-        module match {
-            interface CTOMatch : CTO {
-
-            };
-        };
-    };
     interface SVMExport {
         sequences::Teams getListOfTeams();
-        sequences::Contests getListOfContests(in long long date);
-        sequences::Contests getListOfContests(in cto::CTOTeam team);
-        sequences::Matches getListOfMatches(in cto::CTOContest contest);
+        sequences::Contests getListOfContestsByDate(in long long date);
+        sequences::Contests getListOfContestsByTeam(in cto::team::CTOTeam team);
+        sequences::Matches getListOfMatches(in cto::contest::CTOContest contest);
     };
 }; }; };
