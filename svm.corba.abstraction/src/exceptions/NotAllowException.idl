@@ -1,0 +1,5 @@
+module svm { module corba { module abstraction {
+    module exceptions {
+        exception NotAllowException{};
+    };
+}; }; };

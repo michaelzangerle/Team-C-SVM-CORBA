@@ -1,0 +1,19 @@
+#ifndef _CTO
+    #include <cto/CTO.idl>
+    #define _CTO
+#endif
+
+module svm { module corba { module abstraction {
+    module cto { module location {
+        interface CTOLocation : CTO {
+            readonly attribute string countryCode;
+            readonly attribute string postalCode;
+            readonly attribute string placeName;
+            readonly attribute string district;
+            readonly attribute string province;
+            readonly attribute string community;
+            readonly attribute string coordLat;
+            readonly attribute string coordLong;
+        };
+    }; };
+}; }; };

@@ -1,0 +1,30 @@
+#ifndef _ControllerNotStartedException
+    #include <exceptions/ControllerNotStartedException.idl>
+    #define _ControllerNotStartedException
+#endif
+#ifndef _UnknownException
+    #include <exceptions/UnknownException.idl>
+    #define _UnknownException
+#endif
+#ifndef _RegisterException
+    #include <exceptions/RegisterException.idl>
+    #define _RegisterException
+#endif
+#ifndef _Controller
+    #include <controller/Controller.idl>
+    #define _Controller
+#endif
+#ifndef _CTOAuth
+    #include <cto/CTOAuth.idl>
+    #define _CTOAuth
+#endif
+
+module svm { module corba { module abstraction {
+    module controller { module login {
+        interface CorbaLoginController : Controller {
+            boolean login(in string userName, in string password) raises (exceptions::ControllerNotStartedException, exceptions::UnknownException);
+            boolean loginWithoutLdap(in string userName, in string password) raises (exceptions::ControllerNotStartedException, exceptions::UnknownException);
+            cto::auth::CTOAuth getMember() raises (exceptions::RegisterException);
+        }; };
+    };
+}; }; };

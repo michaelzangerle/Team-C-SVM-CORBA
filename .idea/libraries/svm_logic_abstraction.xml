@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="svm.logic.abstraction">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/svm.corba.implementation/lib/svm.logic.abstraction.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,7 @@
+d:\Dropbox\uebungen\ea\johannes\Assigment_4\Interfaces\src>"C:\Program Files (x86)\Java\jdk1.7.0_07\bin\idlj.exe" -fall Hello.idl
+start orbd -ORBInitialPort 900
+
+
+
+http://docs.oracle.com/javase/1.4.2/docs/guide/idl/jidlExample.html
+http://docs.oracle.com/javase/1.4.2/docs/guide/idl/tutorial/jidl2machines.html

@@ -1,0 +1,10 @@
+#include <all.idl>
+
+module svm { module corba { module abstraction {
+    module cfactory {
+        interface CorbaControllerFactory {
+            controller::login::CorbaLoginController getCorbaLoginController() raises (exceptions::RegisterException);
+            controller::member::CorbaMemberController getMemberController(in cto::auth::CTOAuth auth) raises (exceptions::RegisterException, exceptions::AuthNotFoundException);
+        };
+    };
+}; }; };

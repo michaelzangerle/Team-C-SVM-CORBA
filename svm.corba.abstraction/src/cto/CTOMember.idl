@@ -1,0 +1,38 @@
+#ifndef _CTO
+    #include <cto/CTO.idl>
+    #define _CTO
+#endif
+#ifndef _CTOLocation
+    #include <cto/CTOLocation.idl>
+    #define _CTOLocation
+#endif
+#ifndef _RegisterException
+    #include <exceptions/RegisterException.idl>
+    #define _RegisterException
+#endif
+
+module svm { module corba { module abstraction {
+    module cto { module member {
+        interface CTOMember : CTO {
+            readonly attribute string userName;
+            readonly attribute string firstName;
+            readonly attribute string lastName;
+            readonly attribute string title;
+            readonly attribute string socialNumber;
+            readonly attribute long long birthDate;
+            readonly attribute string gender;
+            readonly attribute long long entryDate;
+            readonly attribute string phone1;
+            readonly attribute string phone2;
+            readonly attribute string email1;
+            readonly attribute string email2;
+            readonly attribute string fax;
+            readonly attribute string street;
+            readonly attribute string streetNumber;
+            readonly attribute string coordLat;
+            readonly attribute string coordLong;
+            readonly attribute cto::location::CTOLocation location;
+            readonly attribute boolean paid;
+        };
+    }; };
+}; }; };

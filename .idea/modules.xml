@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/svm.corba.abstraction/svm.corba.abstraction.iml" filepath="$PROJECT_DIR$/svm.corba.abstraction/svm.corba.abstraction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/svm.corba.client/svm.corba.client.iml" filepath="$PROJECT_DIR$/svm.corba.client/svm.corba.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/svm.corba.implementation/svm.corba.implementation.iml" filepath="$PROJECT_DIR$/svm.corba.implementation/svm.corba.implementation.iml" />
+    </modules>
+  </component>
+</project>
+

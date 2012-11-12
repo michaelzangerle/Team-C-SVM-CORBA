@@ -1,0 +1,13 @@
+#ifndef _CTO
+    #include <cto/CTO.idl>
+    #define _CTO
+#endif
+
+module svm { module corba { module abstraction {
+    module cto { module auth {
+        interface CTOAuth : CTO {
+            readonly attribute string firstName;
+            readonly attribute string lastName;
+        };
+    }; };
+}; }; };

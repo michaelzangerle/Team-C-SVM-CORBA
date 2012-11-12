@@ -1,0 +1,18 @@
+#ifndef _ControllerNotStartedException
+    #include <exceptions/ControllerNotStartedException.idl>
+    #define _ControllerNotStartedException
+#endif
+#ifndef _UnknownException
+    #include <exceptions/UnknownException.idl>
+    #define _UnknownException
+#endif
+
+module svm { module corba { module abstraction {
+    module controller {
+        interface Controller {
+            void start() raises (exceptions::ControllerNotStartedException, exceptions::UnknownException);
+            void commit() raises (exceptions::ControllerNotStartedException);
+            void abort() raises (exceptions::ControllerNotStartedException);
+        };
+    };
+}; }; };

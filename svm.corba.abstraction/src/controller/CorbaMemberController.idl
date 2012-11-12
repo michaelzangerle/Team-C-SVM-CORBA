@@ -1,0 +1,55 @@
+#ifndef _Controller
+    #include <controller/Controller.idl>
+    #define _Controller
+#endif
+#ifndef _CTOMember
+      #include <cto/CTOMember.idl>
+      #define _CTOMember
+#endif
+#ifndef _CTOLocation
+      #include <cto/CTOLocation.idl>
+      #define _CTOLocation
+#endif
+#ifndef _RegisterException
+      #include <exceptions/RegisterException.idl>
+      #define _RegisterException
+#endif
+#ifndef _NotAllowException
+      #include <exceptions/NotAllowException.idl>
+      #define _NotAllowException
+#endif
+#ifndef _AttributeException
+      #include <exceptions/AttributeException.idl>
+      #define _AttributeException
+#endif
+#ifndef _UnknownException
+      #include <exceptions/UnknownException.idl>
+      #define _UnknownException
+#endif
+
+module svm { module corba { module abstraction {
+    module controller { module member {
+        interface CorbaMemberController : Controller {
+            cto::member::CTOMember getMember() raises (exceptions::RegisterException);
+            void setTitle(in string title) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setFirstName(in string firstName) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setLastName(in string lastName) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setSocialNumber(in string socialNumber) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setBirthDate(in long long birthDate) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setGender(in string gender) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setEntryDate(in long long entryDate) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setPhone1(in string phone1) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setPhone2(in string phone2) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setEmail1(in string email1) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setEmail2(in string email2) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setFax(in string fax) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setStreet(in string street) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setStreetNumber(in string streetNumber) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setCoordLat(in string coordLat) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setCoordLong(in string coordLong) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setLocation(in cto::location::CTOLocation location) raises (exceptions::NotAllowException, exceptions::AttributeException);
+            void setPaidCurrentYear() raises (exceptions::NotAllowException, exceptions::AttributeException, exceptions::UnknownException);
+            void setUsername(in string userName) raises (exceptions::NotAllowException, exceptions::AttributeException);
+        }; };
+    };
+}; }; };

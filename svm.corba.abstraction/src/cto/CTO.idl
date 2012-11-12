@@ -1,0 +1,7 @@
+module svm { module corba { module abstraction {
+    module cto {
+        interface CTO {
+            readonly attribute long CTOid;
+        };
+    };
+}; }; };
