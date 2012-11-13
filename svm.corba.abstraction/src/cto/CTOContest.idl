@@ -13,8 +13,8 @@ module svm { module corba { module abstraction {
         interface CTOContest : CTO {
 
             readonly attribute string name;
-            readonly attribute long startDate;
-            readonly attribute long endDate;
+            readonly attribute long long startDate;
+            readonly attribute long long endDate;
             readonly attribute float fee;
 
             readonly attribute cto::contactDetails::CTOContactDetails contactDetails;
