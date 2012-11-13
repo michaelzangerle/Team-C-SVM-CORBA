@@ -2,10 +2,23 @@
     #include <cto/CTO.idl>
     #define _CTO
 #endif
+#ifndef _CTOContactDetails
+    #include <cto/CTOContactDetails.idl>
+    #define _CTOContactDetails
+#endif
+
 
 module svm { module corba { module abstraction {
     module cto { module contest {
         interface CTOContest : CTO {
+
+            readonly attribute string name;
+            readonly attribute long startDate;
+            readonly attribute long endDate;
+            readonly attribute float fee;
+
+            readonly attribute cto::contactDetails::CTOContactDetails contactDetails;
+
         };
     }; };
 }; }; };

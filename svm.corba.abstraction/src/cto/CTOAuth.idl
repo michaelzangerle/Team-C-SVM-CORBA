@@ -8,6 +8,8 @@ module svm { module corba { module abstraction {
         interface CTOAuth : CTO {
             readonly attribute string firstName;
             readonly attribute string lastName;
+            readonly attribute string username;
+            readonly attribute string title;
         };
     }; };
 }; }; };

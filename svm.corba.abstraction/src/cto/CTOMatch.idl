@@ -2,10 +2,37 @@
     #include <cto/CTO.idl>
     #define _CTO
 #endif
+#ifndef _CTOContactDetails
+      #include <cto/CTOContactDetails.idl>
+      #define _CTOContactDetails
+#endif
+#ifndef _CTOMatchType
+      #include <cto/CTOMatchType.idl>
+      #define _CTOMatchType
+#endif
+#ifndef _CTOTeam
+      #include <cto/CTOTeam.idl>
+      #define _CTOTeam
+#endif
+
 
 module svm { module corba { module abstraction {
     module cto { module match {
         interface CTOMatch : CTO {
+
+            readonly attribute string name;
+            readonly attribute long startDate;
+            readonly attribute long endDate;
+            readonly attribute boolean canceled;
+            readonly attribute string description;
+            readonly attribute string remarks;
+            readonly attribute long resultAway;
+            readonly attribute long resultHome;
+            readonly attribute cto::team::CTOTeam homeTeam;
+            readonly attribute cto::team::CTOTeam awayTeam;
+            readonly attribute cto::matchType::CTOMatchType matchType;
+            readonly attribute cto::contactDetails::CTOContactDetails contactDetails;
+
         };
     }; };
 }; }; };

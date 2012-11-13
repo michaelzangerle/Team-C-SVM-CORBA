@@ -3,11 +3,13 @@
     #define _CTO
 #endif
 
-module svm { module corba { module abstraction {
-    module cto { module team {
-        interface CTOTeam : CTO {
 
-          readonly attribute string name;
+module svm { module corba { module abstraction {
+    module cto { module matchType {
+        interface CTOMatchType : CTO {
+
+           readonly attribute string name;
+
 
         };
     }; };
