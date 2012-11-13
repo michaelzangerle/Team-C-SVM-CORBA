@@ -30,6 +30,16 @@ public class CTOAuthImpl extends CTOAuthPOA implements ICTO<ITransferAuth> {
     }
 
     @Override
+    public String username() {
+        return auth.getUsername();
+    }
+
+    @Override
+    public String title() {
+       return auth.getTitle();
+    }
+
+    @Override
     public int CTOid() {
         return id;
     }
