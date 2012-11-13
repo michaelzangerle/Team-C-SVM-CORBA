@@ -1,7 +1,7 @@
 package svm.corba.implementation.cto;
 
-import svm.corba.abstraction.cto.matchType.CTOMatchTypePOA;
-import svm.logic.abstraction.transferobjects.ITransferMatchType;
+import svm.corba.abstraction.cto.team.CTOTeamPOA;
+import svm.logic.abstraction.transferobjects.ITransferTeam;
 
 import java.util.Date;
 
@@ -9,25 +9,25 @@ import java.util.Date;
  * Projectteam : Team C
  * Date: 13.11.12
  */
-public class CTOMatchTyp extends CTOMatchTypePOA implements ICTO<ITransferMatchType> {
-
-    private ITransferMatchType matchTyp;
+public class CTOTeamImpl extends CTOTeamPOA implements ICTO<ITransferTeam>
+{
+    private ITransferTeam team;
     private Date creation;
     private int id;
 
-    public CTOMatchTyp(ITransferMatchType matchTyp) {
-        this.matchTyp = matchTyp;
+    public CTOTeamImpl(ITransferTeam team) {
+        this.team = team;
         this.creation = new Date();
     }
 
     @Override
     public String name() {
-      return matchTyp.getName();
+        return team.getName();
     }
 
     @Override
     public void setCTOid(int id) {
-       this.id=id;
+        this.id=id;
     }
 
     @Override
@@ -36,8 +36,8 @@ public class CTOMatchTyp extends CTOMatchTypePOA implements ICTO<ITransferMatchT
     }
 
     @Override
-    public ITransferMatchType getTransferObject() {
-        return matchTyp;
+    public ITransferTeam getTransferObject() {
+        return team;
     }
 
     @Override
