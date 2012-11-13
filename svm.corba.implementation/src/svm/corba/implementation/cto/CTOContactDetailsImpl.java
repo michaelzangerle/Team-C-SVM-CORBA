@@ -74,7 +74,7 @@ public class CTOContactDetailsImpl extends CTOContactDetailsPOA implements ICTO<
         CTOLocationImpl location = null;
         try {
             location = new CTOLocationImpl(this.contactDetails.getLocation());
-            return location;
+            return location._this();
         } catch (IllegalGetInstanceException e) {
             throw new LogicException(e.getMessage());
         }
