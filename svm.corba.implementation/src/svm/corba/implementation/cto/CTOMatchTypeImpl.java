@@ -9,13 +9,13 @@ import java.util.Date;
  * Projectteam : Team C
  * Date: 13.11.12
  */
-public class CTOMatchTypImpl extends CTOMatchTypePOA implements ICTO<ITransferMatchType> {
+public class CTOMatchTypeImpl extends CTOMatchTypePOA implements ICTO<ITransferMatchType> {
 
     private ITransferMatchType matchTyp;
     private Date creation;
     private int id;
 
-    public CTOMatchTypImpl(ITransferMatchType matchTyp) {
+    public CTOMatchTypeImpl(ITransferMatchType matchTyp) {
         this.matchTyp = matchTyp;
         this.creation = new Date();
     }
