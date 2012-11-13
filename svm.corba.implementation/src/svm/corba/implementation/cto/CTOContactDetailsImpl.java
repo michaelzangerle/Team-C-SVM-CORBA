@@ -2,8 +2,8 @@ package svm.corba.implementation.cto;
 
 import svm.corba.abstraction.cto.contactDetails.CTOContactDetailsPOA;
 import svm.corba.abstraction.cto.location.CTOLocation;
+import svm.corba.abstraction.exceptions.LogicException;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
-import svm.logic.abstraction.transferobjects.ITransferAuth;
 import svm.logic.abstraction.transferobjects.ITransferContactDetails;
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Date;
  * Projectteam: Team C
  * Date: 13.11.12
  */
-public class CTOContactDetailsImpl  extends CTOContactDetailsPOA implements ICTO<ITransferContactDetails> {
+public class CTOContactDetailsImpl extends CTOContactDetailsPOA implements ICTO<ITransferContactDetails> {
 
     private ITransferContactDetails contactDetails;
     private Date creation;
@@ -25,7 +25,7 @@ public class CTOContactDetailsImpl  extends CTOContactDetailsPOA implements ICTO
 
     @Override
     public String phone1() {
-       return contactDetails.getPhone1();
+        return contactDetails.getPhone1();
     }
 
     @Override
@@ -69,25 +69,25 @@ public class CTOContactDetailsImpl  extends CTOContactDetailsPOA implements ICTO
     }
 
     @Override
-    public CTOLocation location() {
+    public CTOLocation location() throws LogicException {
 
         CTOLocationImpl location = null;
         try {
             location = new CTOLocationImpl(this.contactDetails.getLocation());
             return location;
         } catch (IllegalGetInstanceException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new LogicException(e.getMessage());
         }
     }
 
     @Override
     public void setCTOid(int id) {
-       this.id = id;
+        this.id = id;
     }
 
     @Override
     public int CTOid() {
-       return this.id;
+        return this.id;
     }
 
     @Override
