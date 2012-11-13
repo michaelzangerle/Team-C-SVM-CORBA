@@ -21,8 +21,8 @@ module svm { module corba { module abstraction {
         interface CTOMatch : CTO {
 
             readonly attribute string name;
-            readonly attribute long startDate;
-            readonly attribute long endDate;
+            readonly attribute long long startDate;
+            readonly attribute long long endDate;
             readonly attribute boolean canceled;
             readonly attribute string description;
             readonly attribute string remarks;
