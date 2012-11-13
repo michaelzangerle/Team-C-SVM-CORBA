@@ -4,6 +4,7 @@ import svm.corba.abstraction.cto.contactDetails.CTOContactDetails;
 import svm.corba.abstraction.cto.match.CTOMatchPOA;
 import svm.corba.abstraction.cto.matchType.CTOMatchType;
 import svm.corba.abstraction.cto.team.CTOTeam;
+import svm.corba.abstraction.exceptions.LogicException;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
 import svm.logic.abstraction.transferobjects.ITransferMatch;
 
@@ -64,44 +65,46 @@ public class CTOMatchImpl extends CTOMatchPOA implements ICTO<ITransferMatch> {
     }
 
     @Override
-    public CTOTeam homeTeam() {
+    public CTOTeam getHomeTeam() throws LogicException {
         try {
             CTOTeamImpl team = new CTOTeamImpl(match.getHomeTeam());
             return team._this();
         } catch (IllegalGetInstanceException e) {
-            e.printStackTrace();
+            throw new LogicException(e.getMessage());
         }
     }
 
     @Override
-    public CTOTeam awayTeam() {
+    public CTOTeam getAwayTeam() throws LogicException {
         try {
             CTOTeamImpl team = new CTOTeamImpl(match.getAwayTeam());
             return team._this();
         } catch (IllegalGetInstanceException e) {
-            e.printStackTrace();
+            throw new LogicException(e.getMessage());
         }
     }
 
     @Override
-    public CTOMatchType matchType() {
+    public CTOMatchType getMatchType() throws LogicException {
         try {
             CTOMatchTypeImpl type = new CTOMatchTypeImpl(match.getMatchType());
             return type._this();
         } catch (IllegalGetInstanceException e) {
-            e.printStackTrace();
+            throw new LogicException(e.getMessage());
         }
     }
 
+
     @Override
-    public CTOContactDetails contactDetails() {
+    public CTOContactDetails getContactDetails() throws LogicException {
         try {
             CTOContactDetailsImpl c = new CTOContactDetailsImpl(match.getContactDetails());
             return c._this();
         } catch (IllegalGetInstanceException e) {
-            e.printStackTrace();
+            throw new LogicException(e.getMessage());
         }
     }
+
 
     @Override
     public void setCTOid(int id) {

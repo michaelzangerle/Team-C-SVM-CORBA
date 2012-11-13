@@ -7,6 +7,10 @@
     #define _CTOLocation
 #endif
 
+#ifndef _LogicException
+    #include <exceptions/LogicException.idl>
+    #define _LogicException
+#endif
 
 module svm { module corba { module abstraction {
     module cto { module contactDetails {
@@ -20,7 +24,7 @@ module svm { module corba { module abstraction {
             readonly attribute string streetNumber;
             readonly attribute string coordLat;
             readonly attribute string coordLong;
-            readonly attribute cto::location::CTOLocation location;
+            cto::location::CTOLocation getLocation() raises (exceptions::LogicException);
         };
     }; };
 }; }; };

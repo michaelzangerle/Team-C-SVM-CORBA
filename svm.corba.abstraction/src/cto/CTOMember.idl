@@ -6,7 +6,14 @@
     #include <cto/CTOLocation.idl>
     #define _CTOLocation
 #endif
-
+#ifndef _LogicException
+    #include <exceptions/LogicException.idl>
+    #define _LogicException
+#endif
+#ifndef _AttributeException
+    #include <exceptions/AttributeException.idl>
+    #define _AttributeException
+#endif
 module svm { module corba { module abstraction {
     module cto { module member {
         interface CTOMember : CTO {
@@ -27,8 +34,8 @@ module svm { module corba { module abstraction {
             readonly attribute string streetNumber;
             readonly attribute string coordLat;
             readonly attribute string coordLong;
-            readonly attribute cto::location::CTOLocation location;
-            readonly attribute boolean paid;
+            cto::location::CTOLocation getLocation() raises (exceptions::LogicException);
+            boolean getPaid()  raises (exceptions::AttributeException);
         };
     }; };
 }; }; };

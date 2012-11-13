@@ -1,5 +1,6 @@
 package svm.corba.implementation.cto;
 
+import svm.corba.abstraction.cto.contactDetails.CTOContactDetails;
 import svm.corba.abstraction.cto.contest.CTOContestPOA;
 import svm.corba.abstraction.exceptions.LogicException;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
@@ -44,7 +45,7 @@ public class CTOContestImp extends CTOContestPOA implements ICTO<ITransferContes
     }
 
     @Override
-    public svm.corba.abstraction.cto.contactDetails.CTOContactDetails contactDetails() throws LogicException {
+    public CTOContactDetails getContactDetails() throws LogicException {
         try {
             return new CTOContactDetailsImpl(contest.getContactDetails())._this();
         } catch (IllegalGetInstanceException e) {

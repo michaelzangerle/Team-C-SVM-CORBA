@@ -14,7 +14,10 @@
       #include <cto/CTOTeam.idl>
       #define _CTOTeam
 #endif
-
+#ifndef _LogicException
+    #include <exceptions/LogicException.idl>
+    #define _LogicException
+#endif
 
 module svm { module corba { module abstraction {
     module cto { module match {
@@ -28,10 +31,10 @@ module svm { module corba { module abstraction {
             readonly attribute string remarks;
             readonly attribute long resultAway;
             readonly attribute long resultHome;
-            readonly attribute cto::team::CTOTeam homeTeam;
-            readonly attribute cto::team::CTOTeam awayTeam;
-            readonly attribute cto::matchType::CTOMatchType matchType;
-            readonly attribute cto::contactDetails::CTOContactDetails contactDetails;
+            cto::team::CTOTeam getHomeTeam() raises (exceptions::LogicException);
+            cto::team::CTOTeam getAwayTeam() raises (exceptions::LogicException);
+            cto::matchType::CTOMatchType getMatchType()  raises (exceptions::LogicException);
+            cto::contactDetails::CTOContactDetails getContactDetails() raises (exceptions::LogicException);
 
         };
     }; };

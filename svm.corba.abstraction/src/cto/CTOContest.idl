@@ -6,7 +6,10 @@
     #include <cto/CTOContactDetails.idl>
     #define _CTOContactDetails
 #endif
-
+#ifndef _LogicException
+     #include <exceptions/LogicException.idl>
+     #define _LogicException
+#endif
 
 module svm { module corba { module abstraction {
     module cto { module contest {
@@ -17,7 +20,7 @@ module svm { module corba { module abstraction {
             readonly attribute long long endDate;
             readonly attribute float fee;
 
-            readonly attribute cto::contactDetails::CTOContactDetails contactDetails;
+            cto::contactDetails::CTOContactDetails getContactDetails() raises (exceptions::LogicException);
 
         };
     }; };
