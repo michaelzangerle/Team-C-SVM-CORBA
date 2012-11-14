@@ -34,8 +34,10 @@ module svm { module corba { module abstraction {
             readonly attribute string streetNumber;
             readonly attribute string coordLat;
             readonly attribute string coordLong;
-            cto::location::CTOLocation getLocation() raises (exceptions::LogicException);
-            boolean getPaid()  raises (exceptions::AttributeException);
+            readonly attribute string countryCode;
+            readonly attribute string postalCode;
+            readonly attribute string placeName;
+            readonly attribute string district;
         };
     }; };
 }; }; };

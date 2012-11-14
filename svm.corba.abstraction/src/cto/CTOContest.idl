@@ -20,7 +20,19 @@ module svm { module corba { module abstraction {
             readonly attribute long long endDate;
             readonly attribute float fee;
 
-            cto::contactDetails::CTOContactDetails getContactDetails() raises (exceptions::LogicException);
+            readonly attribute string phone1;
+            readonly attribute string phone2;
+            readonly attribute string email1;
+            readonly attribute string email2;
+            readonly attribute string fax;
+            readonly attribute string street;
+            readonly attribute string streetNumber;
+            readonly attribute string coordLat;
+            readonly attribute string coordLong;
+            readonly attribute string countryCode;
+            readonly attribute string postalCode;
+            readonly attribute string placeName;
+            readonly attribute string district;
 
         };
     }; };

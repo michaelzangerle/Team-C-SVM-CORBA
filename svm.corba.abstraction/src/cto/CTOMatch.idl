@@ -29,13 +29,23 @@ module svm { module corba { module abstraction {
             readonly attribute boolean canceled;
             readonly attribute string description;
             readonly attribute string remarks;
+            readonly attribute string phone1;
+            readonly attribute string phone2;
+            readonly attribute string email1;
+            readonly attribute string email2;
+            readonly attribute string fax;
+            readonly attribute string street;
+            readonly attribute string streetNumber;
+            readonly attribute string coordLat;
+            readonly attribute string coordLong;
+            readonly attribute string countryCode;
+            readonly attribute string postalCode;
+            readonly attribute string placeName;
+            readonly attribute string district;
+            readonly attribute string homeTeam;
+            readonly attribute string awayTeam;
             readonly attribute long resultAway;
             readonly attribute long resultHome;
-            cto::team::CTOTeam getHomeTeam() raises (exceptions::LogicException);
-            cto::team::CTOTeam getAwayTeam() raises (exceptions::LogicException);
-            cto::matchType::CTOMatchType getMatchType()  raises (exceptions::LogicException);
-            cto::contactDetails::CTOContactDetails getContactDetails() raises (exceptions::LogicException);
-
         };
     }; };
 }; }; };
