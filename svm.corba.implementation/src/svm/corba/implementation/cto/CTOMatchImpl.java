@@ -1,11 +1,9 @@
 package svm.corba.implementation.cto;
 
-import svm.corba.abstraction.cto.contactDetails.CTOContactDetails;
 import svm.corba.abstraction.cto.match.CTOMatchPOA;
-import svm.corba.abstraction.cto.matchType.CTOMatchType;
-import svm.corba.abstraction.cto.team.CTOTeam;
-import svm.corba.abstraction.exceptions.LogicException;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
+import svm.logic.abstraction.transferobjects.ITransferContactDetails;
+import svm.logic.abstraction.transferobjects.ITransferLocation;
 import svm.logic.abstraction.transferobjects.ITransferMatch;
 
 import java.util.Date;
@@ -65,43 +63,105 @@ public class CTOMatchImpl extends CTOMatchPOA implements ICTO<ITransferMatch> {
     }
 
     @Override
-    public CTOTeam getHomeTeam() throws LogicException {
+    public String phone1() {
+        return getContactDetails().getPhone1();
+    }
+
+    @Override
+    public String phone2() {
+        return getContactDetails().getPhone2();
+    }
+
+    @Override
+    public String email1() {
+        return getContactDetails().getEmail2();
+    }
+
+    @Override
+    public String email2() {
+        return getContactDetails().getEmail1();
+    }
+
+    @Override
+    public String fax() {
+        return getContactDetails().getFax();
+    }
+
+    @Override
+    public String street() {
+        return getContactDetails().getStreet();
+    }
+
+    @Override
+    public String streetNumber() {
+        return getContactDetails().getStreetNumber();
+    }
+
+    @Override
+    public String coordLat() {
+        return getContactDetails().getLat();
+    }
+
+    @Override
+    public String coordLong() {
+        return getContactDetails().getLong();
+    }
+
+    @Override
+    public String countryCode() {
+        return getLocation().getCountryCode();
+    }
+
+    @Override
+    public String postalCode() {
+        return getLocation().getPostalCode();
+    }
+
+    @Override
+    public String placeName() {
+        return getLocation().getPlaceName();
+    }
+
+    @Override
+    public String district() {
+        return getLocation().getDistrict();
+    }
+
+    @Override
+    public String homeTeam() {
         try {
-            CTOTeamImpl team = new CTOTeamImpl(match.getHomeTeam());
-            return team._this();
+            return match.getHomeTeam().getName();
         } catch (IllegalGetInstanceException e) {
-            throw new LogicException(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     @Override
-    public CTOTeam getAwayTeam() throws LogicException {
+    public String awayTeam() {
         try {
-            CTOTeamImpl team = new CTOTeamImpl(match.getAwayTeam());
-            return team._this();
+            return match.getAwayTeam().getName();
         } catch (IllegalGetInstanceException e) {
-            throw new LogicException(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-    @Override
-    public CTOMatchType getMatchType() throws LogicException {
+    private ITransferLocation getLocation() {
         try {
-            CTOMatchTypeImpl type = new CTOMatchTypeImpl(match.getMatchType());
-            return type._this();
+            return getContactDetails().getLocation();
         } catch (IllegalGetInstanceException e) {
-            throw new LogicException(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-
-    @Override
-    public CTOContactDetails getContactDetails() throws LogicException {
+    private ITransferContactDetails getContactDetails() {
         try {
-            CTOContactDetailsImpl c = new CTOContactDetailsImpl(match.getContactDetails());
-            return c._this();
+            return match.getContactDetails();
         } catch (IllegalGetInstanceException e) {
-            throw new LogicException(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

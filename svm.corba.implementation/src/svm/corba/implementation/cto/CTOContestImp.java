@@ -1,10 +1,10 @@
 package svm.corba.implementation.cto;
 
-import svm.corba.abstraction.cto.contactDetails.CTOContactDetails;
 import svm.corba.abstraction.cto.contest.CTOContestPOA;
-import svm.corba.abstraction.exceptions.LogicException;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
+import svm.logic.abstraction.transferobjects.ITransferContactDetails;
 import svm.logic.abstraction.transferobjects.ITransferContest;
+import svm.logic.abstraction.transferobjects.ITransferLocation;
 
 import java.util.Date;
 
@@ -45,11 +45,85 @@ public class CTOContestImp extends CTOContestPOA implements ICTO<ITransferContes
     }
 
     @Override
-    public CTOContactDetails getContactDetails() throws LogicException {
+    public String phone1() {
+        return getContactDetails().getPhone1();
+    }
+
+    @Override
+    public String phone2() {
+        return getContactDetails().getPhone2();
+    }
+
+    @Override
+    public String email1() {
+        return getContactDetails().getEmail2();
+    }
+
+    @Override
+    public String email2() {
+        return getContactDetails().getEmail1();
+    }
+
+    @Override
+    public String fax() {
+        return getContactDetails().getFax();
+    }
+
+    @Override
+    public String street() {
+        return getContactDetails().getStreet();
+    }
+
+    @Override
+    public String streetNumber() {
+        return getContactDetails().getStreetNumber();
+    }
+
+    @Override
+    public String coordLat() {
+        return getContactDetails().getLat();
+    }
+
+    @Override
+    public String coordLong() {
+        return getContactDetails().getLong();
+    }
+
+    @Override
+    public String countryCode() {
+        return getLocation().getCountryCode();
+    }
+
+    @Override
+    public String postalCode() {
+        return getLocation().getPostalCode();
+    }
+
+    @Override
+    public String placeName() {
+        return getLocation().getPlaceName();
+    }
+
+    @Override
+    public String district() {
+        return getLocation().getDistrict();
+    }
+
+    private ITransferLocation getLocation() {
         try {
-            return new CTOContactDetailsImpl(contest.getContactDetails())._this();
+            return getContactDetails().getLocation();
         } catch (IllegalGetInstanceException e) {
-            throw new LogicException(e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    private ITransferContactDetails getContactDetails() {
+        try {
+            return contest.getContactDetails();
+        } catch (IllegalGetInstanceException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
