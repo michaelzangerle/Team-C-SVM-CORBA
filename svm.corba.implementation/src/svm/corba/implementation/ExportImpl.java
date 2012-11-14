@@ -41,6 +41,13 @@ public class ExportImpl extends SVMExportPOA {
     private static String userName = "jwa8658";
     private static String password = "";
 
+    private static ExportImpl instance;
+
+    public static ExportImpl getInstance() throws NotSupportedException, ExistingTransactionException, IllegalGetInstanceException, NoSessionFoundException, NoTransactionException, InstantiationException, IllegalAccessException, RemoteException {
+        if (instance == null) instance = new ExportImpl();
+        return instance;
+    }
+
     private ITransferAuth user;
 
     public ExportImpl() throws RemoteException, IllegalGetInstanceException, NoSessionFoundException, NotSupportedException, IllegalAccessException, InstantiationException, ExistingTransactionException, NoTransactionException {
@@ -102,7 +109,7 @@ public class ExportImpl extends SVMExportPOA {
                     tmps.add(SVMCorbaServer.getInstance().addCTOContest(new CTOContestImpl(contests.get(i))));
                 }
             }
-            result.contests = (CTOContest[]) tmps.toArray();
+            result.contests = (CTOContest[]) tmps.toArray(new CTOContest[0]);
             search.commit();
         } catch (IllegalGetInstanceException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

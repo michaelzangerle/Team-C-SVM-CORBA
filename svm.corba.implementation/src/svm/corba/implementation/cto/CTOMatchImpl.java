@@ -17,7 +17,7 @@ public class CTOMatchImpl extends CTOMatchPOA implements ICTO<ITransferMatch> {
     private Date creation;
     private int id;
 
-    public CTOMatchImpl(ITransferMatch location) {
+    public CTOMatchImpl(ITransferMatch match) {
         this.match = match;
         this.creation = new Date();
     }

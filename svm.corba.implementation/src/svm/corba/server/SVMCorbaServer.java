@@ -13,6 +13,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 import org.omg.PortableServer.Servant;
+import svm.corba.abstraction.SVMExport;
+import svm.corba.abstraction.SVMExportHelper;
 import svm.corba.abstraction.cfactory.CorbaControllerFactory;
 import svm.corba.abstraction.cfactory.CorbaControllerFactoryHelper;
 import svm.corba.abstraction.controller.login.CorbaLoginController;
@@ -32,6 +34,7 @@ import svm.corba.abstraction.cto.team.CTOTeam;
 import svm.corba.abstraction.cto.team.CTOTeamHelper;
 import svm.corba.abstraction.exceptions.RegisterException;
 import svm.corba.implementation.CorbaControllerFactoryImpl;
+import svm.corba.implementation.ExportImpl;
 import svm.corba.implementation.cto.*;
 
 import java.util.*;
@@ -133,9 +136,32 @@ public class SVMCorbaServer {
         return CorbaControllerFactoryHelper.narrow(obj);
     }
 
+    private SVMExport addExport(Servant o) throws RegisterException {
+        org.omg.CORBA.Object obj = getObject(o);
+        return SVMExportHelper.narrow(obj);
+    }
+
     public void registerFactory(String name, CorbaControllerFactoryImpl factory) throws RegisterException {
         try {
             register(name, addFactory(factory));
+        } catch (InvalidName invalidName) {
+            invalidName.printStackTrace();
+            throw new RegisterException("InvalidName");
+        } catch (org.omg.CosNaming.NamingContextPackage.InvalidName invalidName) {
+            invalidName.printStackTrace();
+            throw new RegisterException("InvalidName");
+        } catch (NotFound notFound) {
+            notFound.printStackTrace();
+            throw new RegisterException("NotFound");
+        } catch (CannotProceed cannotProceed) {
+            cannotProceed.printStackTrace();
+            throw new RegisterException("CannotProceed");
+        }
+    }
+
+    public void registerExport(String name, ExportImpl export) throws RegisterException {
+        try {
+            register(name, addExport(export));
         } catch (InvalidName invalidName) {
             invalidName.printStackTrace();
             throw new RegisterException("InvalidName");
