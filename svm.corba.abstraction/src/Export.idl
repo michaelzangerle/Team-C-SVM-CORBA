@@ -10,6 +10,10 @@
     #include <cto/CTOContest.idl>
     #define _CTOContest
 #endif
+#ifndef  _RegisterException
+    #include <exceptions/RegisterException.idl>
+    #define _RegisterException
+#endif
 
 module svm { module corba { module abstraction {
     module sequences {
@@ -24,9 +28,9 @@ module svm { module corba { module abstraction {
         };
     };
     interface SVMExport {
-        sequences::Teams getListOfTeams();
-        sequences::Contests getListOfContestsByDate(in long long date);
-        sequences::Contests getListOfContestsByTeam(in cto::team::CTOTeam team);
-        sequences::Matches getListOfMatches(in cto::contest::CTOContest contest);
+        sequences::Teams getListOfTeams() raises (exceptions::RegisterException);
+        sequences::Contests getListOfContestsByDate(in long long date) raises (exceptions::RegisterException);
+        sequences::Contests getListOfContestsByTeam(in cto::team::CTOTeam team) raises (exceptions::RegisterException);
+        sequences::Matches getListOfMatches(in cto::contest::CTOContest contest) raises (exceptions::RegisterException);
     };
 }; }; };

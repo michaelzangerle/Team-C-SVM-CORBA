@@ -12,13 +12,13 @@ import java.util.Date;
  * Projectteam : Team C
  * Date: 13.11.12
  */
-public class CTOContestImp extends CTOContestPOA implements ICTO<ITransferContest> {
+public class CTOContestImpl extends CTOContestPOA implements ICTO<ITransferContest> {
 
     private ITransferContest contest;
     private Date creation;
     private int id;
 
-    public CTOContestImp(ITransferContest contest) {
+    public CTOContestImpl(ITransferContest contest) {
         this.contest = contest;
         this.creation = new Date();
     }

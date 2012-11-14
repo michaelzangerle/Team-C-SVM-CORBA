@@ -22,13 +22,17 @@ import svm.corba.abstraction.controller.member.CorbaMemberControllerHelper;
 import svm.corba.abstraction.cto.CTO;
 import svm.corba.abstraction.cto.auth.CTOAuth;
 import svm.corba.abstraction.cto.auth.CTOAuthHelper;
+import svm.corba.abstraction.cto.contest.CTOContest;
+import svm.corba.abstraction.cto.contest.CTOContestHelper;
+import svm.corba.abstraction.cto.match.CTOMatch;
+import svm.corba.abstraction.cto.match.CTOMatchHelper;
 import svm.corba.abstraction.cto.member.CTOMember;
 import svm.corba.abstraction.cto.member.CTOMemberHelper;
+import svm.corba.abstraction.cto.team.CTOTeam;
+import svm.corba.abstraction.cto.team.CTOTeamHelper;
 import svm.corba.abstraction.exceptions.RegisterException;
 import svm.corba.implementation.CorbaControllerFactoryImpl;
-import svm.corba.implementation.cto.CTOAuthImpl;
-import svm.corba.implementation.cto.CTOMemberImpl;
-import svm.corba.implementation.cto.ICTO;
+import svm.corba.implementation.cto.*;
 
 import java.util.*;
 
@@ -171,6 +175,24 @@ public class SVMCorbaServer {
         addCTO(o);
         org.omg.CORBA.Object obj = getObject(o);
         return CTOMemberHelper.narrow(obj);
+    }
+
+    public CTOTeam addCTOTeam(CTOTeamImpl o) throws RegisterException {
+        addCTO(o);
+        org.omg.CORBA.Object obj = getObject(o);
+        return CTOTeamHelper.narrow(obj);
+    }
+
+    public CTOContest addCTOContest(CTOContestImpl o) throws RegisterException {
+        addCTO(o);
+        org.omg.CORBA.Object obj = getObject(o);
+        return CTOContestHelper.narrow(obj);
+    }
+
+    public CTOMatch addCTOMatch(CTOMatchImpl o) throws RegisterException {
+        addCTO(o);
+        org.omg.CORBA.Object obj = getObject(o);
+        return CTOMatchHelper.narrow(obj);
     }
     // endregion
 }
