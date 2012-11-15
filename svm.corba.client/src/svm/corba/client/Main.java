@@ -43,16 +43,26 @@ public class Main {
 
             while (true) {
                 System.out.println("Waehle ein Suchkriterium aus?\n(1: Datum 2: Team)\n");
-                int sc = new java.util.Scanner(System.in).nextInt();
+                int sc = -1;
+
+
+                try {
+                    sc = new java.util.Scanner(System.in).nextInt();
+                } catch (Exception e) {
+                    System.out.println("Ungültiger Wert!");
+                    continue;
+                }
+
+
                 switch (sc) {
                     case 1:
                         searchWithDate();
-                        chooseContests();
+
                         System.out.println("XML generiert!\n");
                         break;
                     case 2:
                         searchWithTeam();
-                        chooseContests();
+
                         System.out.println("XML generiert!");
                         break;
                     default:
@@ -72,50 +82,92 @@ public class Main {
     }
 
     private static void chooseContests() throws XMLStreamException, FileNotFoundException, RegisterException {
+        boolean valid = false;
+        int val = 0;
+        while (valid == false) {
+            if (contests.length > 0) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                System.out.println("Bitte wähle unter folgenden Wettbewerben den gewuenschten aus und gib dessen Zahl ein!\n");
+                for (int i = 0; i < contests.length; i++) {
+                    System.out.println("[" + (i + 1) + "]\t" + contests[i].name() + "\t" + sdf.format(contests[i].startDate()));
+                }
 
-        if (contests.length > 0) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-            System.out.println("Bitte wähle unter folgenden Wettbewerben den gewuenschten aus und gib dessen Zahl ein!\n");
-            for (int i = 0; i < contests.length; i++) {
-                System.out.println("[" + (i + 1) + "]\t" + contests[i].name() + "\t" + sdf.format(contests[i].startDate()));
+                try {
+                    val = new java.util.Scanner(System.in).nextInt();
+                    if (val >= 1 && val <= contests.length) {
+                        valid = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ungültiger Wert!");
+                }
+
+
+            } else {
+                System.out.println("Es wurden keine Wettbewerbe gefunden!");
             }
 
-            int c = new java.util.Scanner(System.in).nextInt();
-            generateXML(c);
-        } else {
-            System.out.println("Es wurden keine Wettbewerbe gefunden!");
         }
-
-
+        generateXML(val);
     }
 
     private static void generateXML(int c) throws svm.corba.abstraction.exceptions.RegisterException, FileNotFoundException, XMLStreamException {
-        XMLGenerator file = new XMLGenerator();
-        String fileName = "Matches.xml";
-        Matches matches = export.getListOfMatches(contests[c - 1]);
-        XMLGenerator.getXMLFileForMatches(fileName, contests[c - 1], matches.matches);
+
+        if (c - 1 >= 0 && c - 1 < contests.length) {
+            XMLGenerator file = new XMLGenerator();
+            String fileName = "Matches.xml";
+            Matches matches = export.getListOfMatches(contests[c - 1]);
+            XMLGenerator.getXMLFileForMatches(fileName, contests[c - 1], matches.matches);
+        } else {
+
+        }
     }
 
-    private static void searchWithTeam() throws RegisterException {
-        System.out.println("Bitte wähle einen Teamnamen aus folgender Liste und gib dessen Zahl ein!:\n");
-        teams = export.getListOfTeams().teams;
-        for (int i = 0; i < teams.length; i++) {
-            System.out.println("[" + (i + 1) + "]\t" + teams[i].name());
+    private static void searchWithTeam() throws RegisterException, XMLStreamException, FileNotFoundException {
+        boolean valid = false;
+        int val = 0;
+
+        while (valid == false) {
+            System.out.println("Bitte wähle einen Teamnamen aus folgender Liste und gib dessen Zahl ein!:\n");
+            teams = export.getListOfTeams().teams;
+            for (int i = 0; i < teams.length; i++) {
+                System.out.println("[" + (i + 1) + "]\t" + teams[i].name());
+            }
+            try {
+                val = new java.util.Scanner(System.in).nextInt();
+                if (val >= 1 && val <= teams.length) {
+                    valid = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Ungültiger Wert!");
+            }
+
+
+        }
+        contests = export.getListOfContestsByTeam(teams[val - 1]).contests;
+        chooseContests();
+    }
+
+    private static void searchWithDate() throws RegisterException, ParseException, XMLStreamException, FileNotFoundException {
+
+        boolean b = false;
+        Date date = new Date();
+
+        while (b == false) {
+            System.out.println("Bitte gib ein Datum ein!\n(z.B. 04.11.2012)\n");
+            String val = new java.util.Scanner(System.in).nextLine();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
+            try {
+                date = sdf.parse(val);
+                b = true;
+            } catch (ParseException e) {
+                System.out.println("Ungültiges Datum!");
+            }
+
         }
 
-        int val = new java.util.Scanner(System.in).nextInt();
-
-        contests = export.getListOfContestsByTeam(teams[val-1]).contests;
-
-    }
-
-    private static void searchWithDate() throws RegisterException, ParseException {
-        System.out.println("Bitte gib ein Datum ein!\n(z.B. 04.11.2012)\n");
-        String val = new java.util.Scanner(System.in).nextLine();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = sdf.parse(val);
-
         contests = export.getListOfContestsByDate(date.getTime()).contests;
+        chooseContests();
     }
 }
