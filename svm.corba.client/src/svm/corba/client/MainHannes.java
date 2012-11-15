@@ -7,8 +7,10 @@ import svm.corba.abstraction.SVMExport;
 import svm.corba.abstraction.SVMExportHelper;
 import svm.corba.abstraction.cto.contest.CTOContest;
 import svm.corba.abstraction.cto.match.CTOMatch;
+import svm.corba.abstraction.cto.team.CTOTeam;
 import svm.corba.abstraction.sequences.Contests;
 import svm.corba.abstraction.sequences.Matches;
+import svm.corba.abstraction.sequences.Teams;
 
 import java.util.Calendar;
 
@@ -41,6 +43,21 @@ public class MainHannes {
                 for (CTOMatch match : matches.matches) {
                     System.out.println(match.name());
                 }
+            }
+            System.out.println("--------------------------------------------------");
+            Teams teams = export.getListOfTeams();
+            for (CTOTeam team : teams.teams) {
+                System.out.println(team.name());
+                contests = export.getListOfContestsByTeam(team);
+                for (CTOContest contest : contests.contests) {
+                    System.out.println(contest.name());
+                    Matches matches = export.getListOfMatches(contest);
+                    for (CTOMatch match : matches.matches) {
+                        System.out.println(match.name());
+                    }
+                    System.out.println("---");
+                }
+                System.out.println("");
             }
         } catch (Exception e) {
             System.out.println("ERROR : " + e);
