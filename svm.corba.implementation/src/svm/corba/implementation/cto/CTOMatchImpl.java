@@ -44,11 +44,13 @@ public class CTOMatchImpl extends CTOMatchPOA implements ICTO<ITransferMatch> {
 
     @Override
     public String description() {
+        if(match.getDescription() == null) return "";
         return match.getDescription();
     }
 
     @Override
     public String remarks() {
+        if(match.getRemarks() == null) return "";
         return match.getRemarks();
     }
 
@@ -64,36 +66,43 @@ public class CTOMatchImpl extends CTOMatchPOA implements ICTO<ITransferMatch> {
 
     @Override
     public String phone1() {
+        if(getContactDetails().getPhone1() == null) return "";
         return getContactDetails().getPhone1();
     }
 
     @Override
     public String phone2() {
+        if(getContactDetails().getPhone2() == null) return "";
         return getContactDetails().getPhone2();
     }
 
     @Override
     public String email1() {
+        if(getContactDetails().getEmail1() == null) return "";
         return getContactDetails().getEmail2();
     }
 
     @Override
     public String email2() {
+        if(getContactDetails().getEmail2() == null) return "";
         return getContactDetails().getEmail1();
     }
 
     @Override
     public String fax() {
+        if(getContactDetails().getFax() == null) return "";
         return getContactDetails().getFax();
     }
 
     @Override
     public String street() {
+        if(getContactDetails().getStreet() == null) return "";
         return getContactDetails().getStreet();
     }
 
     @Override
     public String streetNumber() {
+        if(getContactDetails().getStreetNumber() == null) return "";
         return getContactDetails().getStreetNumber();
     }
 
