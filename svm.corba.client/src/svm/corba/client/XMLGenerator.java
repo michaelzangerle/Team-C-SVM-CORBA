@@ -40,6 +40,7 @@ public class XMLGenerator {
         createCloseTag("contest");
         ew.close();
         ew.add(ef.createEndDocument());
+
     }
 
     private static void parseContest(CTOContest contest, CTOMatch[] matches) throws XMLStreamException {

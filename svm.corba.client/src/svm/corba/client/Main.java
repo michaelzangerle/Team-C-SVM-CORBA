@@ -5,24 +5,27 @@ import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import svm.corba.abstraction.SVMExport;
 import svm.corba.abstraction.SVMExportHelper;
-import svm.corba.abstraction.cfactory.CorbaControllerFactory;
-import svm.corba.abstraction.cfactory.CorbaControllerFactoryHelper;
-import svm.corba.abstraction.controller.login.CorbaLoginController;
-import svm.corba.abstraction.cto.auth.CTOAuth;
 import svm.corba.abstraction.cto.contest.CTOContest;
-import svm.corba.abstraction.cto.match.CTOMatch;
-import svm.corba.abstraction.sequences.Contests;
+import svm.corba.abstraction.cto.team.CTOTeam;
+import svm.corba.abstraction.exceptions.RegisterException;
 import svm.corba.abstraction.sequences.Matches;
 
-import java.util.Calendar;
+import javax.xml.stream.XMLStreamException;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * ProjectTeam: Team C
  * Date: 11.11.12
  */
 public class Main {
+
+    private static CTOContest[] contests;
+    private static SVMExport export;
+    private static CTOTeam[] teams;
+
     public static void main(String[] args) {
         try {
             // create and initialize the ORB
@@ -36,20 +39,83 @@ public class Main {
 
             // resolve the Object Reference in Naming
             String name = "SVMExport";
-            SVMExport export = SVMExportHelper.narrow(ncRef.resolve_str(name));
+            export = SVMExportHelper.narrow(ncRef.resolve_str(name));
 
-            Calendar cal = Calendar.getInstance();
-            cal.set(2012, Calendar.NOVEMBER, 4);
-            Contests contests = export.getListOfContestsByDate(cal.getTime().getTime());
-            XMLGenerator file = new XMLGenerator();
-            String fileName = "Matches.xml";
-            Matches matches = export.getListOfMatches(contests.contests[0]);
-            XMLGenerator.getXMLFileForMatches(fileName, contests.contests[0],matches.matches);
+            while (true) {
+                System.out.println("Waehle ein Suchkriterium aus?\n(1: Datum 2: Team)\n");
+                int sc = new java.util.Scanner(System.in).nextInt();
+                switch (sc) {
+                    case 1:
+                        searchWithDate();
+                        chooseContests();
+                        System.out.println("XML generiert!\n");
+                        break;
+                    case 2:
+                        searchWithTeam();
+                        chooseContests();
+                        System.out.println("XML generiert!");
+                        break;
+                    default:
+                        System.out.println("Unbekanntes Suchkriterium!");
+                        continue;
+                }
+
+                contests = null;
+                teams = null;
+            }
 
 
         } catch (Exception e) {
             System.out.println("ERROR : " + e);
             e.printStackTrace(System.out);
         }
+    }
+
+    private static void chooseContests() throws XMLStreamException, FileNotFoundException, RegisterException {
+
+        if (contests.length > 0) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            System.out.println("Bitte wähle unter folgenden Wettbewerben den gewuenschten aus und gib dessen Zahl ein!\n");
+            for (int i = 0; i < contests.length; i++) {
+                System.out.println("[" + (i + 1) + "]\t" + contests[i].name() + "\t" + sdf.format(contests[i].startDate()));
+            }
+
+            int c = new java.util.Scanner(System.in).nextInt();
+            generateXML(c);
+        } else {
+            System.out.println("Es wurden keine Wettbewerbe gefunden!");
+        }
+
+
+    }
+
+    private static void generateXML(int c) throws svm.corba.abstraction.exceptions.RegisterException, FileNotFoundException, XMLStreamException {
+        XMLGenerator file = new XMLGenerator();
+        String fileName = "Matches.xml";
+        Matches matches = export.getListOfMatches(contests[c - 1]);
+        XMLGenerator.getXMLFileForMatches(fileName, contests[c - 1], matches.matches);
+    }
+
+    private static void searchWithTeam() throws RegisterException {
+        System.out.println("Bitte wähle einen Teamnamen aus folgender Liste und gib dessen Zahl ein!:\n");
+        teams = export.getListOfTeams().teams;
+        for (int i = 0; i < teams.length; i++) {
+            System.out.println("[" + (i + 1) + "]\t" + teams[i].name());
+        }
+
+        int val = new java.util.Scanner(System.in).nextInt();
+
+        contests = export.getListOfContestsByTeam(teams[val-1]).contests;
+
+    }
+
+    private static void searchWithDate() throws RegisterException, ParseException {
+        System.out.println("Bitte gib ein Datum ein!\n(z.B. 04.11.2012)\n");
+        String val = new java.util.Scanner(System.in).nextLine();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = sdf.parse(val);
+
+        contests = export.getListOfContestsByDate(date.getTime()).contests;
     }
 }
