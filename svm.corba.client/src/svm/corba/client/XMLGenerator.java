@@ -107,7 +107,13 @@ public class XMLGenerator {
             createNode("homeTeam", m.homeTeam());
 
             addTab(2);
+            createNode("homeTeamResult", m.resultHome()+"");
+
+            addTab(2);
             createNode("awayTeam", m.awayTeam());
+
+            addTab(2);
+            createNode("awayTeamResult", m.resultAway()+"");
 
             addTab(2);
             createNode("startDate", new Date(m.startDate()).toString());
@@ -143,7 +149,7 @@ public class XMLGenerator {
     }
 
 
-    //region init and helper methods
+
 
     private static void createNode(String nodeName, String nodeValue) throws XMLStreamException {
 
@@ -203,5 +209,5 @@ public class XMLGenerator {
         ew.add(startDocument);
     }
 
-    //endregion
+
 }
