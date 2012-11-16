@@ -16,6 +16,7 @@ import svm.logic.abstraction.LogicFacade;
 import svm.logic.abstraction.controller.IContestController;
 import svm.logic.abstraction.controller.ILoginController;
 import svm.logic.abstraction.controller.ISearchController;
+import svm.logic.abstraction.controller.ITeamController;
 import svm.logic.abstraction.exception.IllegalGetInstanceException;
 import svm.logic.abstraction.exception.NotAllowException;
 import svm.logic.abstraction.transferobjects.ITransferAuth;
@@ -135,7 +136,38 @@ public class ExportImpl extends SVMExportPOA {
 
     @Override
     public Contests getListOfContestsByTeam(CTOTeam team) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ITeamController teamController = LogicFacade.getTeamController(user, (ITransferTeam) SVMCorbaServer.getInstance().getCTO(team).getTransferObject());
+        Contests result = new Contests();
+
+        try {
+            teamController.start();
+            List<ITransferContest> contests = teamController.getContests();
+            List<CTOContest> tmps = new LinkedList<CTOContest>();
+            for (int i = 0; i < contests.size(); i++) {
+                tmps.add(SVMCorbaServer.getInstance().addCTOContest(new CTOContestImpl(contests.get(i))));
+            }
+            result.contests = (CTOContest[]) tmps.toArray(new CTOContest[0]);
+            teamController.commit();
+        } catch (NoSessionFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalGetInstanceException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (RemoteException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (NotSupportedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InstantiationException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (NoTransactionException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (ExistingTransactionException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (RegisterException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return result;
     }
 
     @Override
