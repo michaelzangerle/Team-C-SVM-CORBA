@@ -33,6 +33,8 @@ module svm { module corba { module abstraction {
             readonly attribute string postalCode;
             readonly attribute string placeName;
             readonly attribute string district;
+            readonly attribute string sport;
+            readonly attribute boolean finished;
 
         };
     }; };

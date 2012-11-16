@@ -114,7 +114,11 @@ public class Main {
 
         if (c - 1 >= 0 && c - 1 < contests.length) {
             XMLGenerator file = new XMLGenerator();
-            String fileName = "Matches.xml";
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-1mm-YYYY_hh-mm-ss");
+            Date date = new Date();
+
+            String fileName = "Matches"+sdf.format(date)+".xml";
             Matches matches = export.getListOfMatches(contests[c - 1]);
             XMLGenerator.getXMLFileForMatches(fileName, contests[c - 1], matches.matches);
         } else {

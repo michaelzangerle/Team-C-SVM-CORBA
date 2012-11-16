@@ -53,20 +53,33 @@ public class XMLGenerator {
         createNode("fee", contest.fee() + "");
 
         addTab(1);
+        createNode("sport",contest.sport());
+
+        addTab(1);
+        createNode("finished",String.valueOf(contest.finished()));
+
+        addTab(1);
         createOpenTag("contactDetails");
+
         addLineEnd(1);
         addTab(1);
         createNode("phone1", new Date(contest.endDate()).toString());
+
         addTab(1);
         createNode("email1", contest.email1());
+
         addTab(1);
         createNode("fax", contest.fax());
+
         addTab(1);
         createNode("postalcode", contest.postalCode());
+
         addTab(1);
         createNode("place", contest.placeName());
+
         addTab(1);
         createNode("streetNumber", contest.streetNumber());
+
         addTab(1);
         createNode("street", contest.street());
 

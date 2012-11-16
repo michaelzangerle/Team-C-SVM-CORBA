@@ -116,6 +116,23 @@ public class CTOContestImpl extends CTOContestPOA implements ICTO<ITransferConte
         return getLocation().getDistrict();
     }
 
+    @Override
+    public String sport() {
+        try {
+            if(contest.getSport() == null) return "";
+            return contest.getSport().getName();
+        } catch (IllegalGetInstanceException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+    }
+
+    @Override
+    public boolean finished() {
+        return contest.isFinished();
+    }
+
     private ITransferLocation getLocation() {
         try {
             return getContactDetails().getLocation();
