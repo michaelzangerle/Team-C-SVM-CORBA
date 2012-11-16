@@ -115,7 +115,7 @@ public class Main {
         if (c - 1 >= 0 && c - 1 < contests.length) {
             XMLGenerator file = new XMLGenerator();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-1mm-YYYY_hh-mm-ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-YYYY_hh-mm-ss");
             Date date = new Date();
 
             String fileName = "Matches"+sdf.format(date)+".xml";

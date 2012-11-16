@@ -51,11 +51,7 @@ public class XMLGenerator {
         createNode("startDate", new Date(contest.startDate()).toString());
         createNode("endDate", new Date(contest.endDate()).toString());
         createNode("fee", contest.fee() + "");
-
-        addTab(1);
         createNode("sport",contest.sport());
-
-        addTab(1);
         createNode("finished",String.valueOf(contest.finished()));
 
         addTab(1);
