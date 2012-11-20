@@ -49,7 +49,7 @@ public class Main {
                 try {
                     sc = new java.util.Scanner(System.in).nextInt();
                 } catch (Exception e) {
-                    System.out.println("Ungültiger Wert!");
+                    System.out.println("Ungueltiger Wert!");
                     continue;
                 }
 
@@ -98,7 +98,7 @@ public class Main {
                         valid = true;
                     }
                 } catch (Exception e) {
-                    System.out.println("Ungültiger Wert!");
+                    System.out.println("Ungueltiger Wert!");
                 }
 
 
@@ -131,7 +131,7 @@ public class Main {
         int val = 0;
 
         while (valid == false) {
-            System.out.println("Bitte wähle einen Teamnamen aus folgender Liste und gib dessen Zahl ein!:\n");
+            System.out.println("Bitte waehle einen Teamnamen aus folgender Liste und gib dessen Zahl ein!:\n");
             teams = export.getListOfTeams().teams;
             for (int i = 0; i < teams.length; i++) {
                 System.out.println("[" + (i + 1) + "]\t" + teams[i].name());
@@ -142,7 +142,7 @@ public class Main {
                     valid = true;
                 }
             } catch (Exception e) {
-                System.out.println("Ungültiger Wert!");
+                System.out.println("Ungueltiger Wert!");
             }
 
 
@@ -166,7 +166,7 @@ public class Main {
                 date = sdf.parse(val);
                 b = true;
             } catch (ParseException e) {
-                System.out.println("Ungültiges Datum!");
+                System.out.println("Ungueltiges Datum!");
             }
 
         }
