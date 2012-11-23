@@ -22,5 +22,7 @@ public class Main {
         SVMCorbaServer.init(args);
         SVMCorbaServer.getInstance().registerExport("SVMExport", ExportImpl.getInstance());
         SVMCorbaServer.getInstance().run();
+
+
     }
 }
